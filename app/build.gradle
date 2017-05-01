@@ -1,4 +1,3 @@
-apply plugin: 'java'
 apply plugin: 'kotlin'
 apply plugin: 'application'
 
@@ -9,7 +8,8 @@ repositories {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testCompile 'junit:junit:4.12'
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
 
-mainClassName = 'aoeiuv020/HelloKt'
+mainClassName = 'aoeiuv020.HelloKt'
 
