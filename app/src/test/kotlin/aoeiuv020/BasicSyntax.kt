@@ -1,6 +1,7 @@
 package aoeiuv020
+
 import org.junit.Test
-import kotlin.test.*
+import kotlin.test.assertEquals
 
 class BasicSyntaxTest {
     @Test
@@ -13,6 +14,7 @@ class BasicSyntaxTest {
         v = 2
         assertEquals(2, v)
     }
+
     @Test
     fun string() {
         var i = 0
@@ -35,6 +37,8 @@ class BasicSyntaxTest {
         s = "${s.length}"
         assertEquals("2", s)
     }
+
+    @Suppress("unused")
     fun comment() {
         /* block comment 
         /* inner block comment */
@@ -42,6 +46,7 @@ class BasicSyntaxTest {
         */
         // fail()
     }
+
     @Test
     fun number() {
         var i = 0xff_ee_dd

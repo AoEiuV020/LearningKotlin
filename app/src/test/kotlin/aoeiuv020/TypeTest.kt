@@ -1,16 +1,18 @@
 package aoeiuv020
+
 import org.junit.Test
-import kotlin.test.*
+import kotlin.test.assertEquals
 
 class TypeTest {
+    @Suppress("JAVA_CLASS_ON_COMPANION", "RemoveSingleExpressionStringTemplate")
     @Test
     fun type() {
-        var i = 0
+        val i = 0
         assertEquals("int (Kotlin reflection is not available)", "${i::class}")
         assertEquals("int", "${i::class.java}")
         //w: The resulting type of this 'javaClass' call is Class<Int.Companion> and not Class<Int>. Please use the more clear '::class.java' syntax to avoid confusion
         assertEquals("${i::class.java}", "${i.javaClass}")
-        var ii: Int = 0
+        val ii: Int = 0
         assertEquals("${i::class}", "${ii::class}")
         assertEquals("int", "${ii::class.java}")
         assertEquals("${i::class}", "${Int::class}")
@@ -24,13 +26,14 @@ class TypeTest {
         assertEquals("${Int::class.java.javaClass}", "${Int.javaClass::class.java}")
         assertEquals(Int.javaClass.javaClass, Int.javaClass::class.java)
     }
+
     @Test
     fun to() {
-        var i = 0
+        val i = 0
         assertEquals("int", "${i::class.java}")
-        var l = 0L + i
+        val l = 0L + i
         assertEquals("long", "${l::class.java}")
-        var ll = i.toLong()
+        val ll = i.toLong()
         assertEquals("long", "${ll::class.java}")
     }
 }
