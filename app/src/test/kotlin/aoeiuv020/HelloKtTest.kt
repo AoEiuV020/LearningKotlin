@@ -1,6 +1,6 @@
 package aoeiuv020
 import org.junit.Test
-import kotlin.test.*;
+import kotlin.test.*
 
 class HelloKtTest {
     @Test
