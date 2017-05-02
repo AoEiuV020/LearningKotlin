@@ -25,6 +25,8 @@ class TypeTest {
         assertEquals("${Int::class.java.javaClass} (Kotlin reflection is not available)", "${Int.javaClass::class}")
         assertEquals("${Int::class.java.javaClass}", "${Int.javaClass::class.java}")
         assertEquals(Int.javaClass.javaClass, Int.javaClass::class.java)
+        assertEquals("int", "${Int::class.javaPrimitiveType}")
+        assertEquals("Integer", Int::class.javaObjectType.simpleName)
     }
 
     @Test
@@ -35,5 +37,72 @@ class TypeTest {
         assertEquals("long", "${l::class.java}")
         val ll = i.toLong()
         assertEquals("long", "${ll::class.java}")
+    }
+
+    @Test
+    fun character() {
+        val s = "string"
+        //assertEquals('s', s.charAt(0)) // Unresolved reference: charAt
+        val charAtMethod = s.javaClass.getMethod("charAt", Int::class.java)
+        assertEquals('s', charAtMethod.invoke(s, 0))
+        assertEquals('s', s[0])
+        val c = '0'
+        assertEquals("char", "${c::class.java}")
+        assertEquals(48, c.toInt())
+        //assertEquals(48, c) // Type inference failed: Cannot infer type parameter T in fun <T> assertEquals(expected: T, actual: T, message: String? = ...): Unit
+        //assertEquals(48, 0 + c) // None of the following functions can be called with the arguments supplied: 
+        //assertEquals(48, c as Int) // java.lang.Character cannot be cast to java.lang.Integer
+        // if (c == 48) fail() // Operator '==' cannot be applied to 'Char' and 'Int'
+    }
+
+    @Test
+    fun boolean() {
+        val b = true
+        assertEquals("boolean", "${b::class.java}")
+        assertEquals("true", "$b")
+    }
+
+    @Test
+    fun string() {
+        var i = 0
+        var s = "a$i"
+        assertEquals("a0", s)
+        i = 1
+        assertEquals("a0", s)
+        s = "b${++i}"
+        assertEquals("b2", s)
+        assertEquals(2, i)
+        s = "$s.length"
+        assertEquals("b2.length", s)
+        s = "$i++"
+        assertEquals("2++", s)
+        assertEquals(2, i)
+        s = "$++i"
+        assertEquals("\$++i", s)
+        s = "\$i"
+        assertEquals("\$i", s)
+        s = "${s.length}"
+        assertEquals("2", s)
+        s = "str"
+        i = 0
+        for (c in s) {
+            //c = 'a' // Val cannot be reassigned
+            assertEquals(s[i++], c)
+        }
+        s =  """
+        hello
+        """
+        assertEquals("\n        hello\n        ", s)
+        assertEquals("hello", s.trim())
+        s = """
+        |first
+        |second
+        """.trimMargin()
+        assertEquals("first\nsecond", s)
+        s = """
+        >>first
+        >>second
+        """.trimMargin(">>")
+        assertEquals("first\nsecond", s)
     }
 }

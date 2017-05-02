@@ -15,29 +15,6 @@ class BasicSyntaxTest {
         assertEquals(2, v)
     }
 
-    @Test
-    fun string() {
-        var i = 0
-        var s = "a$i"
-        assertEquals("a0", s)
-        i = 1
-        assertEquals("a0", s)
-        s = "b${++i}"
-        assertEquals("b2", s)
-        assertEquals(2, i)
-        s = "$s.length"
-        assertEquals("b2.length", s)
-        s = "$i++"
-        assertEquals("2++", s)
-        assertEquals(2, i)
-        s = "$++i"
-        assertEquals("\$++i", s)
-        s = "\$i"
-        assertEquals("\$i", s)
-        s = "${s.length}"
-        assertEquals("2", s)
-    }
-
     @Suppress("unused")
     fun comment() {
         /* block comment 
@@ -53,5 +30,28 @@ class BasicSyntaxTest {
         assertEquals(0xffeedd, i)
         i = 0b0110_1100
         assertEquals(0x6c, i)
+    }
+
+    @Test
+    fun assert() {
+        assert(true)
+    }
+
+    @Test
+    fun function() {
+        fun sumA(a: Int, b: Int): Int = a + b
+        assertEquals(3, sumA(1, 2))
+        fun sumB(a: Int, b: Int) = a + b
+        assertEquals(3, sumB(1, 2))
+        fun sumC(a: Int, b: Int): Unit {}
+        assertEquals(Unit.javaClass, sumC(1, 2).javaClass)
+        //下面这个抛空指针异常且无法捕获，怀疑是kotlinc的bug,
+        //bug reported kotlin-1.1.2: https://youtrack.jetbrains.com/issue/KT-17692
+        //assertEquals(Unit.javaClass, sumC(1, 2)::class.java) // org.jetbrains.kotlin.codegen.CompilationException: Back-end (JVM) Internal error: Failed to generate function function Cause: java.lang.NullPointerException 
+    }
+
+    @Test
+    fun lateinitTest() {
+
     }
 }
