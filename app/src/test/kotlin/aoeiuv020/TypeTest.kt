@@ -105,4 +105,15 @@ class TypeTest {
         """.trimMargin(">>")
         assertEquals("first\nsecond", s)
     }
+
+    @Test
+    fun any() {
+        fun getObject(): Any = "any"
+        assertEquals(String::class.java, getObject()::class.java)
+        assertEquals(getObject()::class.java, getObject().javaClass)
+        //e: Type inference failed. The value of the type parameter T should be mentioned in input types (argument types, receiver type or expected type). Try to specify it explicitly.
+        //assertEquals(Object::class.java, Any::class.java)
+        assertEquals(Object::class.java.name, Any::class.java.name)
+        assertEquals("${Object::class.java}", "${Any::class.java}")
+    }
 }
