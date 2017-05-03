@@ -44,7 +44,8 @@ class NullTest {
 
     @Test
     fun safeCasts() {
-        val str = "str"
+        fun getObject(): Any = "str"
+        val str = getObject()
         val i: Int? = str as? Int
         assertNull(i)
     }
