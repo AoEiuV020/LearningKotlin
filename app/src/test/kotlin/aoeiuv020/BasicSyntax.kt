@@ -2,6 +2,7 @@ package aoeiuv020
 
 import org.junit.Test
 import kotlin.test.assertEquals
+import kotlin.test.fail
 
 class BasicSyntaxTest {
     @Test
@@ -53,5 +54,24 @@ class BasicSyntaxTest {
     @Test
     fun lateinitTest() {
 
+    }
+
+    @Test
+    fun isTest() {
+        fun getObejct(): Any = "any"
+        val any: Any = getObejct()
+        assertEquals(String::class.java, any::class.java)
+        // e: Type inference failed. The value of the type parameter T should be mentioned in input types (argument types, receiver type or expected type). Try to specify it explicitly.
+        //assertEquals(String::class.java, any.javaClass)
+        //assertEquals(3, any.length) // e: Unresolved reference: length
+        if (any is String) {
+            assertEquals(3, any.length)
+        }
+        //assertEquals(3, any.length) // e: Unresolved reference: length
+        if (any !is String) {
+            fail()
+            return
+        }
+        assertEquals(3, any.length)
     }
 }
