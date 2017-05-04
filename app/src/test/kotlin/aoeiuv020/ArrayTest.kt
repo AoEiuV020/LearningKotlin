@@ -28,6 +28,9 @@ class ArrayTest {
         assertEquals("Integer[]", arrayInteger.javaClass.simpleName)
         assertEquals(2, arrayInteger[0])
         arrayInteger = arrayOf(6, 7)
+        assertEquals("int", arrayInteger[0].javaClass.name)
+        assertEquals("Integer", arrayInteger[0]::class.java.simpleName)
+        assertEquals("int", "${arrayInteger[0]::class.javaPrimitiveType}")
         assertEquals(2, arrayInteger.size)
         assertEquals(6, arrayInteger[0])
     }
