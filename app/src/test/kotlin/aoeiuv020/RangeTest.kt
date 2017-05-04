@@ -67,5 +67,10 @@ class RangeTest {
         assertEquals(d, 3.downTo(1))
         assertEquals(d, (1..3).reversed())
     }
+
+    @Test
+    fun until() {
+        assertEquals(1..3, 1 until 4)
+    }
 }
 
