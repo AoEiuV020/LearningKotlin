@@ -54,6 +54,13 @@ class RangeTest {
     }
 
     @Test
+    fun step() {
+        val r = (1..4)
+        assertEquals(4, r.last)
+        assertEquals(3, r.step(2).last)
+    }
+
+    @Test
     fun downTo() {
         val d = 3 downTo 1
         assertEquals("3 downTo 1 step 1", d.toString())
