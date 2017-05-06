@@ -12,6 +12,7 @@ class DataClassTest {
         var ca = CA()
         assertEquals("default", ca.name)
         assertEquals(20, ca.age)
+        assertEquals("CA(name=default, age=20)", ca.toString())
         ca = CA("AoEiuV020")
         assertEquals("AoEiuV020", ca.name)
         assertEquals(20, ca.age)
