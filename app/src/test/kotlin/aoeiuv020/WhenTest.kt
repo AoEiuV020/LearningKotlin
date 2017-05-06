@@ -6,7 +6,7 @@ import kotlin.test.*
 /**
  * Created by AoEiuV020 on 2017/05/04.
  */
-class When {
+class WhenTest {
     @Test
     fun whenTest() {
         //w: Parameter 'obj' is never used
