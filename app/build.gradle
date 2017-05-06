@@ -1,5 +1,6 @@
 apply plugin: 'kotlin'
 apply plugin: 'application'
+apply plugin: 'org.jetbrains.dokka'
 
 repositories {
     jcenter()
@@ -13,3 +14,25 @@ dependencies {
 
 mainClassName = 'aoeiuv020.HelloKt'
 
+dokka {
+    //moduleName = 'data'
+    //outputFormat = 'javadoc'
+    //outputDirectory = "$buildDir/javadoc"
+    //processConfigurations = ['compile', 'extra']
+    //includes = ['packages.md', 'extra.md']
+    //samples = ['samples/basic.kt', 'samples/advanced.kt']
+    linkMapping {
+        dir = "src/main/kotlin"
+        url = "https://github.com/cy6erGn0m/vertx3-lang-kotlin/blob/master/src/main/kotlin"
+        suffix = "#L"
+    }
+    sourceDirs = files('src/main/kotlin')
+    sourceDirs = files('src/main/java')
+    sourceDirs += files('src/test/kotlin')
+    sourceDirs += files('src/test/java')
+}
+
+task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
+    outputFormat = "javadoc"
+    outputDirectory = "$buildDir/dokkaJavadoc"
+}
