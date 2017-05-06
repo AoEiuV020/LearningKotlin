@@ -15,5 +15,20 @@ class ExtensionFunctionTest {
         //assertEquals(0, Int::class.declaredMemberExtensionFunctions.size)
         //assertEquals(0, Int.javaClass.kotlin.memberExtensionFunctions.size)
     }
+
+    @Test
+    fun nullableReceiver() {
+        fun Any?.toString(): String {
+            return if (this == null) "null" else "notnull"
+        }
+        assertEquals("null", null.toString())
+        //没有调用上面那个拓展方法，
+        assertEquals("8", 8.toString())
+        fun Any?.ts(): String {
+            return if (this == null) "null" else "notnull"
+        }
+        assertEquals("null", null.ts())
+        assertEquals("notnull", 8.ts())
+    }
 }
 
