@@ -49,5 +49,26 @@ class ObjectTest {
         assertFalse(fJfs.isAccessible)
         assertEquals("jfs", fJfs.get(null))
     }
+
+    @Test
+    fun objectMethod() {
+        var c = OB.javaClass
+        var mA = c.getMethod("a")
+        assertEquals("a", mA.invoke(OB))
+        try {
+            assertEquals("a", mA.invoke(null))
+            fail()
+        } catch (ignore: NullPointerException) {
+        }
+        var mB = c.getMethod("b")
+        assertEquals("b", mB.invoke(OB))
+        assertEquals("b", mB.invoke(null))
+    }
+
+    object OB {
+        fun a() = "a"
+        @JvmStatic
+        fun b() = "b"
+    }
 }
 
