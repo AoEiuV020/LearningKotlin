@@ -99,6 +99,10 @@ class TypeTest {
         |second
         """.trimMargin()
         assertEquals("first\nsecond", s)
+        assertEquals(s, """
+        first
+        second
+        """.trimIndent())
         s = """
         >>first
         >>second
