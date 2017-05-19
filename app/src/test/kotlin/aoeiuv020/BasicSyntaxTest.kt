@@ -1,5 +1,6 @@
 package aoeiuv020
 
+import java.util.Arrays
 import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
@@ -73,5 +74,13 @@ class BasicSyntaxTest {
             return
         }
         assertEquals(3, any.length)
+    }
+
+    @Test
+    fun destructArray() {
+        fun p(vararg args: Int) = Arrays.toString(args)
+        assertEquals("[1, 2]", p(1, 2))
+        val a = intArrayOf(7, 8)
+        assertEquals("[1, 7, 8, 2]", p(1, *a, 2))
     }
 }
