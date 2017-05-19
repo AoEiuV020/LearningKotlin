@@ -61,5 +61,12 @@ class NullTest {
         assertEquals("[1, 2, 4]", nonnullList.toString())
         //nonnullList = nullableList // Type mismatch: inferred type is List<Int?> but List<Int> was expected
     }
+
+    @Test
+    fun nullableReceiver() {
+        var s: String?  = null
+        //assertFalse(s?.length > 0) //e: Infix call corresponds to a dot-qualified call 's?.length.compareTo(0)' which is not allowed on a nullable receiver 's?.length'. Use '?.'-qualified call instead
+        assertFalse(s?.length ?: 0 > 0)
+    }
 }
 
