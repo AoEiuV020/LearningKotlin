@@ -30,5 +30,24 @@ class ExtensionFunctionTest {
         assertEquals("null", null.ts())
         assertEquals("notnull", 8.ts())
     }
+
+    @Test
+    fun property() {
+        assertEquals(2, 1.a)
+        assertEquals(4, 1.a.a.a)
+        val i = 8
+        assertEquals(7, i.b)
+        i.b = 8
+        try {
+            i.b = 9
+            fail()
+        } catch (ignore: AssertionError) {
+        }
+    }
+    val Int.a
+    get() = this + 1
+    var Int.b: Int
+    get() = this - 1
+    set(o) = assertTrue(o == 8)
 }
 
