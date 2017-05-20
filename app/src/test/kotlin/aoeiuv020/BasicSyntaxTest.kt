@@ -49,6 +49,8 @@ class BasicSyntaxTest {
         assertEquals(Unit.javaClass, sumC(1, 2).javaClass)
         //下面这个抛空指针异常且无法捕获，怀疑是kotlinc的bug,
         //bug reported kotlin-1.1.2: https://youtrack.jetbrains.com/issue/KT-17692
+        //已经修复了，1.1.4生效，
+        // https://github.com/JetBrains/kotlin/commit/52237ce77fb6a3c3f0d0543260968b37b16e9c34
         //assertEquals(Unit.javaClass, sumC(1, 2)::class.java) // org.jetbrains.kotlin.codegen.CompilationException: Back-end (JVM) Internal error: Failed to generate function function Cause: java.lang.NullPointerException 
     }
 
