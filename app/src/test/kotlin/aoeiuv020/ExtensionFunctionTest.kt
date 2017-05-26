@@ -49,5 +49,14 @@ class ExtensionFunctionTest {
     var Int.b: Int
     get() = this - 1
     set(o) = assertTrue(o == 8)
+
+    @Test
+    fun reflect() {
+       val c = this.javaClass
+       assertEquals(ExtensionFunctionTest::class.java, c)
+       c.methods.forEach(::println)
+       val m = c.getDeclaredMethod("getA", Int::class.javaPrimitiveType);
+       assertEquals(9, m.invoke(this, 8))
+    }
 }
 
