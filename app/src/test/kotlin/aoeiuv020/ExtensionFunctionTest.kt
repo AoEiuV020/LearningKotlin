@@ -40,7 +40,7 @@ class ExtensionFunctionTest {
         i.b = 8
         try {
             i.b = 9
-            fail()
+            throw Exception()
         } catch (ignore: AssertionError) {
         }
     }
