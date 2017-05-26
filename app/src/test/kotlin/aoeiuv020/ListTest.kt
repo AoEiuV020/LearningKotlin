@@ -49,5 +49,17 @@ class ListTest {
         val m = mapOf("first" to 1)
         assertEquals("java.util.Collections\$SingletonMap", m.javaClass.name)
     }
+    
+    @Test
+    fun drop() {
+        val a = "01234567890".li
+        assertEquals(listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0), a)
+        assertEquals("4567890".li, a.drop(4))
+        assertEquals("0123456".li, a.dropLast(4))
+        assertEquals("34567890".li, a.dropWhile { it < 3 })
+        assertEquals("0123456789".li, a.dropLastWhile { it < 3 })
+    }
+
+    val String.li get() = this.map{ it.toInt() - '0'.toInt() }
 }
 
