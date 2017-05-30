@@ -79,5 +79,20 @@ class DataClassTest {
     data class CC(var wrapper: Wrapper = Wrapper("default")) {
         fun deepCopy(wrapper: Wrapper = this.wrapper) = CC(wrapper.copy())
     }
+
+    @Test
+    fun equals() {
+        val dcaa = DCA("a")
+        assertEquals(DCA("a"), dcaa)
+        dcaa.name = "b"
+        assertEquals(DCA("b"), dcaa)
+        val ncaa = NCA("a")
+        assertNotEquals(NCA("a"), ncaa)
+        ncaa.name = "b"
+        assertNotEquals(NCA("b"), ncaa)
+    }
+
+    data class DCA(var name: String)
+    class NCA(var name: String)
 }
 
