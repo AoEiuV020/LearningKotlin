@@ -46,5 +46,17 @@ class ClassTest {
     }
     class E(i: Int = 0) {
     }
+
+    @Test
+    fun setter() {
+        val f = F()
+        assertNull(f.s)
+        f.s = "v"
+        assertNull(f.s)
+    }
+    class F() {
+        var s: String? = null
+            set(value) { assertEquals("v", value) }
+    }
 }
 
