@@ -54,9 +54,28 @@ class ClassTest {
         f.s = "v"
         assertNull(f.s)
     }
+
     class F() {
         var s: String? = null
-            set(value) { assertEquals("v", value) }
+            set(value) {
+                assertEquals("v", value)
+            }
+    }
+
+    @Test
+    fun setterField() {
+        val g = G()
+        assertNull(g.s)
+        g.s = "g"
+        assertEquals("g", g.s)
+    }
+
+    class G() {
+        var s: String? = null
+            set(value) {
+                assertEquals("g", value)
+                field = value
+            }
     }
 }
 
