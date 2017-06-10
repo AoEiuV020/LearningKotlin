@@ -120,4 +120,12 @@ class TypeTest {
         assertEquals(Object::class.java.name, Any::class.java.name)
         assertEquals("${Object::class.java}", "${Any::class.java}")
     }
+
+    @Test
+    fun reifiedTest() {
+        //e: construction is not yet supported in inline functions
+        //inline fun <reified T> foo() = T::class.java
+        assertEquals(String::class.java, foo<String>())
+    }
+    inline fun <reified T> foo() = T::class.java
 }
