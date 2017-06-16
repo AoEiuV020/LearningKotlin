@@ -47,5 +47,15 @@ class LoopTest {
         } while (j < 10) // j is visible here!
         assertEquals(11, i)
     }
+
+    @Test
+    fun repeat() {
+        var i = 0;
+        repeat(8) {
+            assertEquals(i, it)
+            ++i
+        }
+        assertEquals(8, i)
+    }
 }
 
