@@ -94,5 +94,16 @@ class DataClassTest {
 
     data class DCA(var name: String)
     class NCA(var name: String)
+
+    @Test
+    fun extends() {
+        val e = CE(7)
+        assertEquals("CE(b=7)", e.toString())
+    }
+
+    // error: modifier 'open' is incompatible with 'data'
+    //open data class A(val i: Int) 
+    open class CD(val a: Int)
+    data class CE(val b: Int) : CD(8)
 }
 
