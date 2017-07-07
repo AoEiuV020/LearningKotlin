@@ -68,5 +68,54 @@ class NullTest {
         //assertFalse(s?.length > 0) //e: Infix call corresponds to a dot-qualified call 's?.length.compareTo(0)' which is not allowed on a nullable receiver 's?.length'. Use '?.'-qualified call instead
         assertFalse(s?.length ?: 0 > 0)
     }
+
+    @Test
+    fun overloadTest() {
+        val a: CA = CA()
+        a.foo("nonnull")
+    }
+
+    class CA {
+        fun foo(s: String) {
+            assertEquals("nonnull", s)
+        }
+        // e: Platform declaration clash: The following declarations have the same JVM signature (foo(Ljava/lang/String;)V):
+        /*
+        fun foo(s: String?) {
+            assertNull(s)
+        }
+        */
+    }
+
+    @Test
+    fun overrideTest() {
+        val b = CB()
+        b.foo(null)
+        val c = CC()
+        c.foo("nonnull")
+
+        val aj: CAJava = CD()
+        try {
+            aj.foo(null)
+            fail();
+        } catch (e: IllegalArgumentException) {
+            assertEquals("Parameter specified as non-null is null: method aoeiuv020.NullTest\$CD.foo, parameter s", e.message)
+        }
+    }
+    class CB : IAJava {
+        override fun foo(s: String?) {
+            assertNull(s)
+        }
+    }
+    class CC : IAJava {
+        override fun foo(s: String) {
+            assertEquals("nonnull", s)
+        }
+    }
+    class CD : CAJava() {
+        override fun foo(s: String) {
+            assertEquals("nonnull", s)
+        }
+    }
 }
 
