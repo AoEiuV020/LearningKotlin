@@ -1,2 +1,2 @@
 rootProject.name = 'LearningKotlin'
-include 'app', 'okhttp'
+include 'app'
